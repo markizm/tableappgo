@@ -1,0 +1,65 @@
+<html>
+ <head>
+  <title>Release Table</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script>
+   $(document).ready(function() {
+    $.ajax({ 
+     type: 'GET', 
+     url: '/api', 
+     dataType: 'json',
+     success: function (data) { 
+      $.each(data, function(key, value) {
+       var ed = new Date(value.endTime)
+       var endTime = ed.getMonth() + 1 + "/" + ed.getDate() + "/" + ed.getFullYear();
+
+       var st = new Date(value.startTime)
+       var startTime = st.getMonth() + 1 + "/" + st.getDate() + "/" + st.getFullYear();
+
+       $("#api tr:last").after("<tr><td><a href src='http://opsjira.yp.com/browse/'"+value.cmTicket +"'>" + value.cmTicket + "</a></td><td>" + value.relTicket + "</td><td>" + value.appName + "</td><td>" + value.progress + "</td><td>" + value.status + "</td><td>" + value.startTime + "</td><td>" + value.endTime + "</td></tr>")
+      });
+     }
+    });
+   });
+  </script>
+  <style>
+   th {
+    background-color:#9cabd3;
+   }
+   .progress {
+    max-width: 100px; 
+    background-color:#9cabd3;
+    text-overflow: progress;
+   }
+  </style>
+ </head>
+ <body>
+ <nav>
+  <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cpoint.html">Catchpoint Graphs</a></li>
+  </ul>
+ </nav>
+  <table id="api" class="table">
+   <tr>
+    <th class="cm">CM</th>
+    <th class="rel">REL</th>
+    <th class="appname">Application</th>
+    <th class="progress" >Progress</th> 
+    <th class="status">Status</th>
+    <th class="starttime">Start Time</th>
+    <th class="endtime">End Time</th>
+   </tr>
+  </table>
+  <script>
+  $(document).ready(function(){
+  $('ul').css({'background': '#FFFFCC', 'font-color': '#000000', 'max-width': '2000px'})
+  $('nav').css({'height': '40px'})
+  $('li').hide()
+  $('li').slideDown('slow')
+  });
+  </script>
+ </body>
+</html>

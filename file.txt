@@ -1,0 +1,12 @@
+#Using same OS as my ssvm for my image inside the container
+FROM centos:centos7
+MAINTAINER Mark Magaling mm343g@yp.com
+#Added everything that was in my centos-base repo list
+ADD ./local.repo /etc/yum.repos.d/local.repo
+ADD ./vpdb.go /vpdb.go  
+ADD ./go-sql-driver /go-sql-driver
+ADD ./vpdb.sh /vpdb.sh 
+EXPOSE 9003 
+RUN chmod -v +x /vpdb.sh
+
+CMD ["/vpdb.sh"]
