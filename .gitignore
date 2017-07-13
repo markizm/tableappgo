@@ -1,0 +1,3 @@
+{
+	"DB_user": "user:password@tcp(host.west.com:3306)/viewpoint"
+}
